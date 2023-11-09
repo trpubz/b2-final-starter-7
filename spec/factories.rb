@@ -1,4 +1,10 @@
 FactoryBot.define do
+  factory :bulk_discount do
+    discount { Faker::Number.decimal(r_digits: 2) }
+    min_qty { Faker::Number.decimal(l_digits: 2) }
+    association :merchant, factory: :merchant
+  end
+
   factory :customer do
     first_name { Faker::Name.first_name }
     last_name { Faker::Dessert.variety }
@@ -6,14 +12,11 @@ FactoryBot.define do
 
   factory :invoice do
     status { [0, 1, 2].sample }
-    merchant
-    customer
+    association :customer, factory: :customer
   end
 
   factory :merchant do
     name { Faker::Space.galaxy }
-    invoices
-    items
   end
 
   factory :item do
@@ -26,12 +29,11 @@ FactoryBot.define do
   factory :transaction do
     result { [0, 1].sample }
     credit_card_number { Faker::Finance.credit_card }
-    invoice
+    association :invoice, factory: :invoice
   end
 
   factory :invoice_item do
     status { [0, 1, 2].sample }
-    merchant
-    invoice
+    association :invoice, factory: :invoice
   end
 end

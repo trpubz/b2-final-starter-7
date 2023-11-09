@@ -6,6 +6,11 @@
   </div>
 
   <% @merchant.bulk_discounts.each do |discount| %>
-    <p><%= link_to "Discount ##{discount.id}", merchant_discounts_path(@merchant, discount) %></p>
+    <tr class="discount-<%= discount.id %>">
+
+      <td><%= link_to "Discount ##{discount.id}", merchant_discount_path(@merchant, discount) %></td>
+      <td><%= discount.discount.to_discount_format %></td>
+      <td>Min Qty: <%= discount.min_qty %></td>
+    </tr>
   <% end %>
 </body>
