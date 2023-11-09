@@ -22,7 +22,13 @@ class Merchant < ApplicationRecord
   end
 
   def ordered_items_to_ship
-    item_ids = InvoiceItem.where("status = 0 OR status = 1").order(:created_at).pluck(:item_id)
+    # !!! Fixed Logical Error -- with joins and .merchant_id match !!!
+    item_ids = InvoiceItem
+                 .joins(:item)
+                 .where("(invoice_items.status = 0 OR invoice_items.status = 1) AND items.merchant_id = #{self.id}")
+                 .order(:created_at)
+                 .pluck(:item_id)
+
     item_ids.map do |id|
       Item.find(id)
     end

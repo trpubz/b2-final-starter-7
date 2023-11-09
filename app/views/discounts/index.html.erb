@@ -1,0 +1,11 @@
+<%= render partial: "shared/nav" %>
+
+<body>
+  <div class="row">
+    <p class='col-12'>My Discounts</p>
+  </div>
+
+  <% @merchant.bulk_discounts.each do |discount| %>
+    <p><%= link_to "Discount ##{discount.id}", merchant_discounts_path(@merchant, discount) %></p>
+  <% end %>
+</body>

@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
+  root "landing#index"
+
   resources :merchants, only: [:show] do
     resources :dashboard, only: [:index]
     resources :items, except: [:destroy]
     resources :item_status, only: [:update]
     resources :invoices, only: [:index, :show, :update]
+    resources :discounts, only: [:index]
   end
 
   namespace :admin do

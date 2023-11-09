@@ -1,0 +1,6 @@
+<h1>Wittle Wittle Shop B2</h1>
+
+<%= render partial: "landing/landing_nav", locals: {
+  merchant_dashboard_index_path: merchant_dashboard_index_path(@merchants.find(1)),
+  merchant_items_path: merchant_items_path(@merchants.find(1)),
+  merchant_invoices_path: merchant_invoices_path(@merchants.find(1))} %>

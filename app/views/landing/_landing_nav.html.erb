@@ -1,0 +1,20 @@
+<div class="nav-container container-fluid">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <h3 class="navbar-text">Merchant #1</h3>
+    <ul class="nav navbar-nav pull-right">
+      <li><%= link_to 'Dashboard M1', merchant_dashboard_index_path, class: 'link_1', style: 'pull-right' %>
+      <li><%= link_to 'Items', merchant_items_path, class: 'link_1', style: 'pull-right' %>
+      <li><%= link_to 'Invoices', merchant_invoices_path, class: 'link_1', style: 'pull-right' %>
+    </ul>
+  </nav>
+</div>
+<div class="nav-container container-fluid">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <h3 class="navbar-text">Admin Dashboard</h3>
+    <ul class="nav navbar-nav pull-right">
+      <li><%= link_to 'Dashboard', admin_dashboard_index_path %></li>
+      <li><%= link_to 'Merchants', admin_merchants_path %></li>
+      <li><%= link_to 'Invoices', admin_invoices_path %></li>
+    </ul>
+  </nav>
+</div>
