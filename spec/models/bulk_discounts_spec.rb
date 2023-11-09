@@ -10,7 +10,7 @@ RSpec.describe BulkDiscount, type: :model do
     it { should belong_to :merchant }
   end
 
-  describe "PORO extentsions" do
+  describe "PORO extensions" do
     describe "::to_discount_format" do
       it "formats the discount value" do
         discount = create(:bulk_discount, discount: 0.20)
