@@ -76,7 +76,6 @@ RSpec.describe "invoices show" do
     expect(page).to have_content(@ii_1.quantity)
     expect(page).to have_content(@ii_1.unit_price)
     expect(page).to_not have_content(@ii_4.unit_price)
-
   end
 
   it "shows the total revenue for this invoice" do
@@ -99,5 +98,4 @@ RSpec.describe "invoices show" do
       expect(page).to_not have_content("in progress")
     end
   end
-
 end

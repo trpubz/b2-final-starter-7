@@ -11,7 +11,7 @@ class Admin::MerchantsController < ApplicationController
 
   def create
     Merchant.create!(name: params[:name])
-    flash.notice = 'Merchant Has Been Created!'
+    flash.notice = "Merchant Has Been Created!"
     redirect_to admin_merchants_path
   end
 
@@ -29,6 +29,7 @@ class Admin::MerchantsController < ApplicationController
   end
 
   private
+
   def set_merchant
     @merchant = Merchant.find(params[:id])
   end
@@ -36,5 +37,4 @@ class Admin::MerchantsController < ApplicationController
   def merchant_params
     params.require(:merchant).permit(:name)
   end
-
 end

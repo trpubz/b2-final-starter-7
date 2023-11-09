@@ -61,7 +61,7 @@ describe "Admin Invoices Index Page" do
 
   it "should have status as a select field that updates the invoices status" do
     within("#status-update-#{@i1.id}") do
-      select("cancelled", :from => "invoice[status]")
+      select("cancelled", from: "invoice[status]")
       expect(page).to have_button("Update Invoice")
       click_button "Update Invoice"
 

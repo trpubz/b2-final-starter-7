@@ -81,5 +81,4 @@ describe "merchant invoices index" do
 
     expect(current_path).to eq(merchant_invoice_path(@merchant1, @invoice_1))
   end
-
 end

@@ -1,26 +1,26 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe Merchant do
   describe "validations" do
     it { should validate_presence_of :name }
   end
   describe "relationships" do
+    it { should have_many :bulk_discounts }
     it { should have_many :items }
     it { should have_many(:invoice_items).through(:items) }
-    it {should have_many(:invoices).through(:invoice_items)}
+    it { should have_many(:invoices).through(:invoice_items) }
     it { should have_many(:customers).through(:invoices) }
     it { should have_many(:transactions).through(:invoices) }
-
   end
 
   describe "class methods" do
     before :each do
-      @merchant1 = Merchant.create!(name: 'Hair Care')
-      @merchant2 = Merchant.create!(name: 'Jewelry')
-      @merchant3 = Merchant.create!(name: 'Office Space')
-      @merchant4 = Merchant.create!(name: 'The Office')
-      @merchant5 = Merchant.create!(name: 'Office Improvement')
-      @merchant6 = Merchant.create!(name: 'Pens & Stuff')
+      @merchant1 = Merchant.create!(name: "Hair Care")
+      @merchant2 = Merchant.create!(name: "Jewelry")
+      @merchant3 = Merchant.create!(name: "Office Space")
+      @merchant4 = Merchant.create!(name: "The Office")
+      @merchant5 = Merchant.create!(name: "Office Improvement")
+      @merchant6 = Merchant.create!(name: "Pens & Stuff")
 
       @item_1 = Item.create!(name: "Shampoo", description: "This washes your hair", unit_price: 10, merchant_id: @merchant1.id, status: 1)
       @item_2 = Item.create!(name: "Conditioner", description: "This makes your hair shiny", unit_price: 8, merchant_id: @merchant1.id)
@@ -37,12 +37,12 @@ describe Merchant do
       @item_11 = Item.create!(name: "Eraser", description: "Felt", unit_price: 6, merchant: @merchant5)
       @item_12 = Item.create!(name: "Sharpie", description: "Permanent", unit_price: 4, merchant: @merchant6)
 
-      @customer_1 = Customer.create!(first_name: 'Joey', last_name: 'Smith')
-      @customer_2 = Customer.create!(first_name: 'Cecilia', last_name: 'Jones')
-      @customer_3 = Customer.create!(first_name: 'Mariah', last_name: 'Carrey')
-      @customer_4 = Customer.create!(first_name: 'Leigh Ann', last_name: 'Bron')
-      @customer_5 = Customer.create!(first_name: 'Sylvester', last_name: 'Nader')
-      @customer_6 = Customer.create!(first_name: 'Herber', last_name: 'Kuhn')
+      @customer_1 = Customer.create!(first_name: "Joey", last_name: "Smith")
+      @customer_2 = Customer.create!(first_name: "Cecilia", last_name: "Jones")
+      @customer_3 = Customer.create!(first_name: "Mariah", last_name: "Carrey")
+      @customer_4 = Customer.create!(first_name: "Leigh Ann", last_name: "Bron")
+      @customer_5 = Customer.create!(first_name: "Sylvester", last_name: "Nader")
+      @customer_6 = Customer.create!(first_name: "Herber", last_name: "Kuhn")
 
       @invoice_1 = Invoice.create!(customer_id: @customer_1.id, status: 2)
       @invoice_2 = Invoice.create!(customer_id: @customer_1.id, status: 2)
@@ -78,10 +78,9 @@ describe Merchant do
       @transaction7 = Transaction.create!(credit_card_number: 203942, result: 1, invoice_id: @invoice_7.id)
       @transaction7 = Transaction.create!(credit_card_number: 203942, result: 1, invoice_id: @invoice_8.id)
       @transaction8 = Transaction.create!(credit_card_number: 203942, result: 1, invoice_id: @invoice_9.id)
-
     end
 
-    it 'top_merchants' do
+    it "top_merchants" do
       actual = Merchant.top_merchants.map do |result|
         result.name
       end
@@ -91,8 +90,8 @@ describe Merchant do
 
   describe "instance methods" do
     before :each do
-      @merchant1 = Merchant.create!(name: 'Hair Care')
-      @merchant2 = Merchant.create!(name: 'Jewelry')
+      @merchant1 = Merchant.create!(name: "Hair Care")
+      @merchant2 = Merchant.create!(name: "Jewelry")
 
       @item_1 = Item.create!(name: "Shampoo", description: "This washes your hair", unit_price: 10, merchant_id: @merchant1.id, status: 1)
       @item_2 = Item.create!(name: "Conditioner", description: "This makes your hair shiny", unit_price: 8, merchant_id: @merchant1.id)
@@ -104,12 +103,12 @@ describe Merchant do
       @item_5 = Item.create!(name: "Bracelet", description: "Wrist bling", unit_price: 200, merchant_id: @merchant2.id)
       @item_6 = Item.create!(name: "Necklace", description: "Neck bling", unit_price: 300, merchant_id: @merchant2.id)
 
-      @customer_1 = Customer.create!(first_name: 'Joey', last_name: 'Smith')
-      @customer_2 = Customer.create!(first_name: 'Cecilia', last_name: 'Jones')
-      @customer_3 = Customer.create!(first_name: 'Mariah', last_name: 'Carrey')
-      @customer_4 = Customer.create!(first_name: 'Leigh Ann', last_name: 'Bron')
-      @customer_5 = Customer.create!(first_name: 'Sylvester', last_name: 'Nader')
-      @customer_6 = Customer.create!(first_name: 'Herber', last_name: 'Kuhn')
+      @customer_1 = Customer.create!(first_name: "Joey", last_name: "Smith")
+      @customer_2 = Customer.create!(first_name: "Cecilia", last_name: "Jones")
+      @customer_3 = Customer.create!(first_name: "Mariah", last_name: "Carrey")
+      @customer_4 = Customer.create!(first_name: "Leigh Ann", last_name: "Bron")
+      @customer_5 = Customer.create!(first_name: "Sylvester", last_name: "Nader")
+      @customer_6 = Customer.create!(first_name: "Herber", last_name: "Kuhn")
 
       @invoice_1 = Invoice.create!(customer_id: @customer_1.id, status: 2)
       @invoice_2 = Invoice.create!(customer_id: @customer_1.id, status: 2)
@@ -138,7 +137,6 @@ describe Merchant do
       @transaction6 = Transaction.create!(credit_card_number: 879799, result: 0, invoice_id: @invoice_6.id)
       @transaction7 = Transaction.create!(credit_card_number: 203942, result: 1, invoice_id: @invoice_7.id)
       @transaction7 = Transaction.create!(credit_card_number: 203942, result: 1, invoice_id: @invoice_8.id)
-
     end
     it "can list items ready to ship" do
       expect(@merchant1.ordered_items_to_ship).to eq([@item_1, @item_1, @item_3, @item_4, @item_7, @item_8, @item_4, @item_4])
@@ -164,7 +162,7 @@ describe Merchant do
       expect(@merchant2.enabled_items).to eq([])
     end
 
-    it "disabled_items" do 
+    it "disabled_items" do
       expect(@merchant1.disabled_items).to eq([@item_2, @item_3, @item_4, @item_7, @item_8])
       expect(@merchant2.disabled_items).to eq([@item_5, @item_6])
     end

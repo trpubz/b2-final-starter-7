@@ -60,8 +60,8 @@ describe "Admin Merchant Index" do
       click_link "#{@m1.name}"
       expect(current_path).to eq(admin_merchant_path(@m1))
     end
-      expect(page).to have_content(@m1.name)
-      expect(page).to_not have_content(@m2.name)
+    expect(page).to have_content(@m1.name)
+    expect(page).to_not have_content(@m2.name)
   end
 
   it "should have set merchants to disabled by default" do

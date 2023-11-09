@@ -12,11 +12,12 @@ class Admin::InvoicesController < ApplicationController
 
   def update
     @invoice.update(invoice_params)
-    flash.notice = 'Invoice Has Been Updated!'
+    flash.notice = "Invoice Has Been Updated!"
     redirect_to admin_invoice_path(@invoice)
   end
 
   private
+
   def set_invoice
     @invoice = Invoice.find(params[:id])
   end

@@ -93,9 +93,9 @@ RSpec.describe "merchant dashboard" do
     expect(page).to have_no_content(@customer_6.first_name)
     expect(page).to have_no_content(@customer_6.last_name)
   end
+
   it "can see a section for Items Ready to Ship with list of names of items ordered and ids" do
     within("#items_ready_to_ship") do
-
       expect(page).to have_content(@item_1.name)
       expect(page).to have_content(@item_1.invoice_ids)
 

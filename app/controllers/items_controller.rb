@@ -8,11 +8,9 @@ class ItemsController < ApplicationController
   end
 
   def show
-
   end
 
   def edit
-
   end
 
   def update
@@ -26,18 +24,18 @@ class ItemsController < ApplicationController
   end
 
   def new
-
   end
 
   def create
     Item.create!(name: params[:name],
-                description: params[:description],
-                unit_price: params[:unit_price],
-                merchant: @merchant)
+      description: params[:description],
+      unit_price: params[:unit_price],
+      merchant: @merchant)
     redirect_to merchant_items_path(@merchant)
   end
 
   private
+
   def item_params
     params.require(:item).permit(:name, :description, :unit_price, :merchant_id)
   end
@@ -50,5 +48,4 @@ class ItemsController < ApplicationController
   def find_merchant
     @merchant = Merchant.find(params[:merchant_id])
   end
-
 end
