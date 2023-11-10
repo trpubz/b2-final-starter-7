@@ -7,3 +7,4 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 Rake::Task["csv_load:all"].invoke
+Rake::Task["create_discounts:load"].invoke

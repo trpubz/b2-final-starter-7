@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :bulk_discount do
-    discount { Faker::Number.decimal(r_digits: 2) }
+    discount { Faker::Number.decimal(l_digits: 0, r_digits: 2) }
     min_qty { Faker::Number.decimal(l_digits: 2) }
     association :merchant, factory: :merchant
   end
