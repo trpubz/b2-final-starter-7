@@ -5,12 +5,15 @@
     <p class='col-12'>My Discounts</p>
   </div>
 
-  <% @merchant.bulk_discounts.each do |discount| %>
-    <tr class="discount-<%= discount.id %>">
+  <p><%= link_to "Create New Discount", new_merchant_discount_path(@merchant) %></p>
 
-      <td><%= link_to "Discount ##{discount.id}", merchant_discount_path(@merchant, discount) %></td>
-      <td><%= discount.discount.to_discount_format %></td>
-      <td>Min Qty: <%= discount.min_qty %></td>
-    </tr>
-  <% end %>
+  <table class="table">
+    <% @merchant.bulk_discounts.each do |discount| %>
+      <tr id="discount-<%= discount.id %>">
+        <td class="td"><%= link_to "Discount ##{discount.id}", merchant_discount_path(@merchant, discount) %></td>
+        <td class="td"><%= discount.discount.to_discount_format %></td>
+        <td class="td">Min Qty: <%= discount.min_qty %></td>
+      </tr>
+    <% end %>
+  </table>
 </body>

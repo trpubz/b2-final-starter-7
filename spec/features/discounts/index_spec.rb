@@ -56,6 +56,44 @@ RSpec.describe "Bulk Discounts Index Page", type: :feature do
     # And I see my new bulk discount listed
     visit merchant_discounts_path(@merchant1)
 
-    expect(page).to have_link "Create New Discount"
+    click_link "Create New Discount"
+
+    expect(page).to have_current_path new_merchant_discount_path(@merchant1)
+
+    fill_in "Discount", with: "0.33"
+    fill_in "Min Qty", with: "33"
+
+    click_button "Create"
+
+    expect(page).to have_current_path merchant_discounts_path(@merchant1)
+
+    within("#discount-#{@merchant1.bulk_discounts.last.id}") do
+      expect(page).to have_content @merchant1.bulk_discounts.last.discount.to_discount_format
+      expect(page).to have_content "Min Qty: #{@merchant1.bulk_discounts.last.min_qty}"
+    end
+  end
+
+  context "user enters bad info into the Create form" do
+    it "flashes an alert on bad Discount data" do
+      visit new_merchant_discount_path(@merchant1)
+
+      fill_in "Discount", with: "AA"
+      fill_in "Min Qty", with: "33"
+
+      click_button "Create"
+
+      expect(page).to have_content "Invalid Inputs: ensure discount is a decimal and minimum quantity is a whole number"
+    end
+
+    it "flashes an alert on bad Min Qty data" do
+      visit new_merchant_discount_path(@merchant1)
+
+      fill_in "Discount", with: "0.33"
+      fill_in "Min Qty", with: "AA"
+
+      click_button "Create"
+
+      expect(page).to have_content "Invalid Inputs: ensure discount is a decimal and minimum quantity is a whole number"
+    end
   end
 end

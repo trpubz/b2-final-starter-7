@@ -139,7 +139,7 @@ RSpec.describe "merchant dashboard" do
 
     expect(page).to have_current_path merchant_discounts_path(@merchant1)
 
-    within(".discount-#{@discount1.id}") do
+    within("#discount-#{@discount1.id}") do
       expect(page).to have_link "Discount ##{@discount1.id}"
       expect(page).to have_content @discount1.discount.to_discount_format.to_s
       expect(page).to have_content "Min Qty: #{@discount1.min_qty}"
