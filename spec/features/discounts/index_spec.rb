@@ -94,6 +94,7 @@ RSpec.describe "Bulk Discounts Index Page", type: :feature do
       click_button "Create"
 
       expect(page).to have_content "Invalid Inputs: ensure discount is a decimal and minimum quantity is a whole number"
+      saop
     end
   end
 end
