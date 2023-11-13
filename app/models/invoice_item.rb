@@ -16,11 +16,15 @@ class InvoiceItem < ApplicationRecord
   end
 
   def discounted_price
-    bulk_discount = item.merchant.bulk_discounts
-                        .where("? >= min_qty", self.quantity)
-                        .order(min_qty: :desc)
-                        .first
+    bulk_discount = discount
 
     bulk_discount.nil? ? nil : (1 - bulk_discount.discount) * self.unit_price
+  end
+
+  def discount
+    item.merchant.bulk_discounts
+      .where("? >= min_qty", self.quantity)
+      .order(min_qty: :desc)
+      .first
   end
 end

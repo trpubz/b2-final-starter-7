@@ -26,6 +26,7 @@
         <th class="th1">Quantity</th>
         <th class="th1">Unit Price</th>
         <th class="th1">Discounted Price</th>
+        <th class="th1">Discount Link</th>
         <th class="th1">Status</th>
       </tr>
     </thead>
@@ -37,6 +38,7 @@
           <td style="text-align:center"><%= i.quantity %></td>
           <td style="text-align:center">$<%= i.unit_price %></td>
           <td style="text-align:center">$<%= i.discounted_price.nil? ? "--" : i.discounted_price %></td>
+          <td style="text-align:center">$<%= i.discounted_price.nil? ? "" : i.discounted_price %></td>
           <td style="text-align:center">
             <%= form_with model: @invoice, url: merchant_invoice_path(@merchant, @invoice), method: :patch, local: true do |f| %>
               <%= f.select :status, Invoice.statuses.keys, selected: "#{@invoice.status}" %>

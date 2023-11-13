@@ -77,5 +77,13 @@ RSpec.describe InvoiceItem, type: :model do
         expect(@ii_1.discounted_price).to be_nil
       end
     end
+
+    describe "#discount" do
+      it "returns the bulk discount if any" do
+        expect(@ii_5.discount).to eq(@d1)
+        expect(@ii_6.discount).to eq(@d2)
+        expect(@ii_1.discount).to be_nil
+      end
+    end
   end
 end
