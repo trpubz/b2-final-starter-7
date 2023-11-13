@@ -37,8 +37,11 @@
           <td style="text-align:center"><%= i.item.name %></td>
           <td style="text-align:center"><%= i.quantity %></td>
           <td style="text-align:center">$<%= i.unit_price %></td>
-          <td style="text-align:center">$<%= i.discounted_price.nil? ? "--" : i.discounted_price %></td>
-          <td style="text-align:center">$<%= i.discounted_price.nil? ? "" : i.discounted_price %></td>
+          <% discount = i.discount %>
+          <td style="text-align:center">$<%= discount.nil? ? "--" : i.discounted_price %></td>
+          <td style="text-align:center"><%= discount.nil? ? "" :
+                                               (link_to "Discount #{discount.id}",
+                                                       merchant_discount_path(@merchant, discount)) %></td>
           <td style="text-align:center">
             <%= form_with model: @invoice, url: merchant_invoice_path(@merchant, @invoice), method: :patch, local: true do |f| %>
               <%= f.select :status, Invoice.statuses.keys, selected: "#{@invoice.status}" %>
