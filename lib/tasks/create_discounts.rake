@@ -6,7 +6,7 @@ namespace :create_discounts do
       2.times {
         merchant.bulk_discounts.create!(
           discount: Faker::Number.decimal(l_digits: 0, r_digits: 2),
-          min_qty: Faker::Number.decimal(l_digits: 2)
+          min_qty: 10
         )
       }
     end

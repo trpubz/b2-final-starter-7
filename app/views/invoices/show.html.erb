@@ -12,7 +12,7 @@
 
   <p> Created on: <%= @invoice.created_at.strftime("%A, %B %-d, %Y") %></p>
   <p>Total Revenue: <%= @invoice.total_revenue %></p>
-  <p>Total Revenue w/ Discounts: <%= @invoice.total_discount_revenue %></p>
+  <p>Total Revenue w/ Discounts: <%= @invoice.total_discounted_revenue %></p>
 
   <h4>Customer:</h4>
     <%= @customer.first_name %> <%= @customer.last_name %><br>
@@ -32,20 +32,18 @@
 
     <tbody>
       <% @invoice.invoice_items.each do |i| %>
-        <section id="the-status-<%= i.id %>">
-          <tr class="tr">
-            <td style="text-align:center"><%= i.item.name %></td>
-            <td style="text-align:center"><%= i.quantity %></td>
-            <td style="text-align:center">$<%= i.unit_price %></td>
-            <td style="text-align:center">$<%= i.discounted_price %></td>
-            <td style="text-align:center">
-              <%= form_with model: @invoice, url: merchant_invoice_path(@merchant, @invoice), method: :patch, local: true do |f| %>
-                <%= f.select :status, Invoice.statuses.keys, selected: "#{@invoice.status}" %>
-                <%= f.submit 'Update Invoice' %>
-              <% end %>
-              </td>
-          </tr>
-        </section>
+        <tr class="tr" id="the-status-<%= i.id %>">
+          <td style="text-align:center"><%= i.item.name %></td>
+          <td style="text-align:center"><%= i.quantity %></td>
+          <td style="text-align:center">$<%= i.unit_price %></td>
+          <td style="text-align:center">$<%= i.discounted_price.nil? ? "--" : i.discounted_price %></td>
+          <td style="text-align:center">
+            <%= form_with model: @invoice, url: merchant_invoice_path(@merchant, @invoice), method: :patch, local: true do |f| %>
+              <%= f.select :status, Invoice.statuses.keys, selected: "#{@invoice.status}" %>
+              <%= f.submit 'Update Invoice' %>
+            <% end %>
+            </td>
+        </tr>
       <% end %>
     </tbody>
   </table>
