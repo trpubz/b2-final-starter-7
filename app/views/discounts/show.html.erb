@@ -4,4 +4,7 @@
   <div class="row">
     <p class='col-12'>Bulk Discount: <%= @discount.id %></p>
   </div>
+
+  <p><%= @discount.discount.to_discount_format %></p>
+  <p>Min Qty: <%= @discount.min_qty %></p>
 </body>
