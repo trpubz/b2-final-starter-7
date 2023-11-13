@@ -27,7 +27,6 @@ class DiscountsController < ApplicationController
 
       redirect_to merchant_discounts_path(@merchant)
     end
-
   end
 
   def destroy

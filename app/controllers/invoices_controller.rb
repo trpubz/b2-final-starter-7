@@ -3,7 +3,7 @@ class InvoicesController < ApplicationController
   before_action :find_merchant, only: [:index]
 
   def index
-    @invoices = @merchant.invoices
+    @invoices = @merchant.invoices.group("invoices.id")  # added group by, otherwise shows duplicate entries
   end
 
   def show

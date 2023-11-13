@@ -150,4 +150,3 @@ RSpec.describe "merchant dashboard" do
     expect(page).to have_current_path merchant_discount_path(@merchant1, @discount1)
   end
 end
-

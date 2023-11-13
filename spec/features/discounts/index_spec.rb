@@ -107,12 +107,11 @@ RSpec.describe "Bulk Discounts Index Page", type: :feature do
     # Then I am redirected back to the bulk discounts index page
     # And I no longer see the discount listed
     visit merchant_discounts_path(@merchant1)
-    
+
     within("#discount-#{@discount1.id}") do
       click_button "Delete"
     end
 
     expect(page).to_not have_content "Discount #{@discount1.id}"
-
   end
 end
