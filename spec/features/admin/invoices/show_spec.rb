@@ -69,4 +69,30 @@ describe "Admin Invoices Index Page" do
       expect(@i1.status).to eq("completed")
     end
   end
+
+  it "shows the un-discounted invoice and the discounted revenue from bulk ordering" do
+    # 8: Admin Invoice Show Page: Total Revenue and Discounted Revenue
+    #
+    # As an admin
+    # When I visit an admin invoice show page
+    # Then I see the total revenue from this invoice (not including discounts)
+    # And I see the total discounted revenue from this invoice which includes bulk discounts in the calculation
+    require "action_view/helpers/number_helper"
+    
+    ii = InvoiceItem.create!(invoice_id: @i1.id, item_id: @item_1.id, quantity: 1, unit_price: 6, status: 1)
+    visit admin_invoice_path(@i1)
+
+    expect(page).to have_content(@i1.total_revenue)
+    expect(page).to have_content(
+      "Total Revenue w/ Discounts: $#{@i1.total_discounted_revenue}"
+    )
+
+    within("#the-status-#{@ii_1.id}") do
+      expect(page).to have_content @ii_1.discounted_price
+    end
+
+    within("#the-status-#{ii.id}") do
+      expect(page).to have_content "--"
+    end
+  end
 end
