@@ -13,6 +13,7 @@
         <td class="td"><%= link_to "Discount ##{discount.id}", merchant_discount_path(@merchant, discount) %></td>
         <td class="td"><%= discount.discount.to_discount_format %></td>
         <td class="td">Min Qty: <%= discount.min_qty %></td>
+        <td class="td"><%= button_to "Delete", merchant_discount_path(@merchant, discount), method: :delete %></td>
       </tr>
     <% end %>
   </table>

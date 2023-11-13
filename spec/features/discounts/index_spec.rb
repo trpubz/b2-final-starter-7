@@ -94,7 +94,25 @@ RSpec.describe "Bulk Discounts Index Page", type: :feature do
       click_button "Create"
 
       expect(page).to have_content "Invalid Inputs: ensure discount is a decimal and minimum quantity is a whole number"
-      saop
     end
+  end
+
+  it "allows user to delete bulk discount" do
+    # 3: Merchant Bulk Discount Delete
+    #
+    # As a merchant
+    # When I visit my bulk discounts index
+    # Then next to each bulk discount I see a button to delete it
+    # When I click this button
+    # Then I am redirected back to the bulk discounts index page
+    # And I no longer see the discount listed
+    visit merchant_discounts_path(@merchant1)
+    
+    within("#discount-#{@discount1.id}") do
+      click_button "Delete"
+    end
+
+    expect(page).to_not have_content "Discount #{@discount1.id}"
+
   end
 end
