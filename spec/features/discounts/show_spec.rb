@@ -53,5 +53,62 @@ RSpec.describe "Bulk Discounts show Page", type: :feature do
 
     expect(page).to have_content @discount1.discount.to_discount_format
     expect(page).to have_content @discount1.min_qty
+  end
+
+  it "has a feature to edit the discount" do
+    # 5: Merchant Bulk Discount Edit
+    #
+    # As a merchant
+    # When I visit my bulk discount show page
+    # Then I see a link to edit the bulk discount
+    # When I click this link
+    # Then I am taken to a new page with a form to edit the discount
+    # And I see that the discounts current attributes are pre-poluated in the form
+    # When I change any/all of the information and click submit
+    # Then I am redirected to the bulk discount's show page
+    # And I see that the discount's attributes have been updated
+    visit merchant_discount_path(@merchant1, @discount1)
+
+    click_button "Edit"
+
+    expect(page).to have_current_path edit_merchant_discount_path(@merchant1, @discount1)
+
+    discount = ".33"
+    qty = "33"
+    fill_in "Discount", with: discount
+    fill_in "Min Qty", with: qty
+    click_button "Submit"
+    @discount1.update!(discount: discount, min_qty: qty)
+
+    expect(page).to have_current_path merchant_discount_path(@merchant1, @discount1)
+
+    expect(page).to have_content @discount1.discount.to_discount_format
+    expect(page).to have_content @discount1.min_qty
+  end
+
+  context "bad data is passed in the edit form" do
+    it "has a renders the edit form with flash alert" do
+      # 5: Merchant Bulk Discount Edit
+      #
+      # As a merchant
+      # When I visit my bulk discount show page
+      # Then I see a link to edit the bulk discount
+      # When I click this link
+      # Then I am taken to a new page with a form to edit the discount
+      # And I see that the discounts current attributes are pre-poluated in the form
+      # When I change any/all of the information and click submit
+      # Then I am redirected to the bulk discount's show page
+      # And I see that the discount's attributes have been updated
+      visit edit_merchant_discount_path(@merchant1, @discount1)
+
+      discount = ".aa"
+      qty = "3a"
+      fill_in "Discount", with: discount
+      fill_in "Min Qty", with: qty
+      click_button "Submit"
+      # @discount1.update(discount: discount, min_qty: qty)
+
+      expect(page).to have_content "Invalid Inputs: ensure discount is a decimal and minimum quantity is a whole number"
     end
+  end
 end

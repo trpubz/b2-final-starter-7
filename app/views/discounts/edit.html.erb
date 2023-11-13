@@ -1,0 +1,7 @@
+<%= render partial: "shared/nav" %>
+
+<%= render partial: "form",
+           locals: {method: :patch,
+                    url: merchant_discount_path(@merchant, @discount),
+                    model: @discount,
+                    submit_label: "Submit" } %>
