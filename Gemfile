@@ -57,7 +57,6 @@ group :development, :test do
   gem "debug", platforms: %i[mri mingw x64_mingw]
   gem "capybara"
   gem "factory_bot_rails"
-  gem "faker"
   gem "launchy"
   gem "orderly"
   gem "pry"
@@ -65,7 +64,6 @@ group :development, :test do
   gem "shoulda-matchers"
   gem "simplecov"
   gem "standardrb"
-  gem "httparty"
   gem "rails-controller-testing"
 end
 
