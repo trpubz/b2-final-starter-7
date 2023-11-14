@@ -17,4 +17,14 @@
       </tr>
     <% end %>
   </table>
+
+  <div class="row">
+    <p class='col-12'>Upcoming Holidays</p>
+  </div>
+
+  <div class="upcoming-holidays">
+    <% @next_holidays.each do | holiday | %>
+        <p><%= "#{holiday.local_name} | #{holiday.date}" %></p>
+    <% end %>
+  </div>
 </body>

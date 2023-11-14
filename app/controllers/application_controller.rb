@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   private
 
   def set_next_holidays
-    holidays = Rails.cache.read("holidays") || []
+    holidays = Rails.cache.read("holidays") || HolidayService.holidays
     @next_holidays = holidays[0..2]
   end
 end
