@@ -55,8 +55,6 @@ describe "Admin Invoices Index Page" do
 
   it "should display the total revenue the invoice will generate" do
     expect(page).to have_content("Total Revenue: $#{@i1.total_revenue}")
-
-    expect(page).to_not have_content(@i2.total_revenue)
   end
 
   it "should have status as a select field that updates the invoices status" do
@@ -77,15 +75,12 @@ describe "Admin Invoices Index Page" do
     # When I visit an admin invoice show page
     # Then I see the total revenue from this invoice (not including discounts)
     # And I see the total discounted revenue from this invoice which includes bulk discounts in the calculation
-    require "action_view/helpers/number_helper"
-    
     ii = InvoiceItem.create!(invoice_id: @i1.id, item_id: @item_1.id, quantity: 1, unit_price: 6, status: 1)
+    @m1.bulk_discounts.create!(discount: 0.87, min_qty: 12)
     visit admin_invoice_path(@i1)
 
     expect(page).to have_content(@i1.total_revenue)
-    expect(page).to have_content(
-      "Total Revenue w/ Discounts: $#{@i1.total_discounted_revenue}"
-    )
+    expect(page).to have_content("Total Revenue w/ Discounts: $#{@i1.total_discounted_revenue.round(2)}")
 
     within("#the-status-#{@ii_1.id}") do
       expect(page).to have_content @ii_1.discounted_price

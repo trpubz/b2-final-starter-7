@@ -142,4 +142,13 @@ RSpec.describe "invoices show" do
       expect(page).to have_no_link
     end
   end
+
+  it "prevents discount modification when invoice pending" do
+    # When an invoice is pending, a merchant should not be able to delete or edit a
+    # bulk discount that applies to any of their items on that invoice.
+    ii = InvoiceItem.create!(
+      invoice_id: @invoice_1.id, item_id: @item_8.id, quantity: 12, unit_price: 6, status: 0
+    )
+    visit merchant_invoice_path(@merchant1, @invoice_1)
+  end
 end

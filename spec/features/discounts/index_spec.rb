@@ -114,4 +114,22 @@ RSpec.describe "Bulk Discounts Index Page", type: :feature do
 
     expect(page).to_not have_content "Discount #{@discount1.id}"
   end
+
+  xit "has a section with next 3 upcoming holidays" do
+    # Holidays API
+    #
+    # As a merchant
+    # When I visit the discounts index page
+    # I see a section with a header of "Upcoming Holidays"
+    # In this section the name and date of the next 3 upcoming US holidays are listed.
+    #
+    # Use the Next Public Holidays Endpoint in the [Nager.Date API](https://date.nager.at/swagger/index.html)
+    visit merchant_discounts_path(@merchant1)
+
+    holidays = [0]  # API call
+
+    within(".upcoming-holidays") do
+      expect(page).to have_content holidays[0].name
+    end
+  end
 end
